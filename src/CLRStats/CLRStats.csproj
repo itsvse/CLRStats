@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net45;net46;netstandard2.0;netstandard2.1</TargetFrameworks>
+		<RootNamespace>CLRStats</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Authors>itsvse</Authors>
+    <Copyright>Copyright © 2021 itsvse.com</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageTags>clr gc cpu thread</PackageTags>
+    <PackageProjectUrl>https://github.com/itsvse/CLRStats</PackageProjectUrl>
+    <Description>A plug-in that counts the usage of .NET application resources, including: CPU usage, GC, thread status, support for obtaining status information through web requests (access paths and authentication can be customized), and data will be returned in JSON format.</Description>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='net45' or '$(TargetFramework)'=='net46'">
+		<PackageReference Include="Owin" Version="1.0" />
+		<PackageReference Include="Microsoft.Owin" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="3.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' or '$(TargetFramework)'=='netstandard2.1'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+	</ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' or '$(TargetFramework)'=='netstandard2.1'">
+		<Compile Remove="OwinMiddlewareExtensions.cs" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)'=='net45' or '$(TargetFramework)'=='net46'">
+		<Compile Remove="AspNetCoreMiddlewareExtensions.cs" />
+	</ItemGroup>
+</Project>
